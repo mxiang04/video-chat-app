@@ -4,7 +4,6 @@ import Peer from "simple-peer";
 
 const SocketContext = createContext();
 
-// const socket = io('http://localhost:5000');
 const socket = io("https://localhost:5000");
 
 const ContextProvider = ({ children }) => {
@@ -36,7 +35,6 @@ const ContextProvider = ({ children }) => {
 
   const answerCall = () => {
     setCallAccepted(true);
-
     const peer = new Peer({ initiator: false, trickle: false, stream });
 
     peer.on("signal", (data) => {
@@ -48,7 +46,6 @@ const ContextProvider = ({ children }) => {
     });
 
     peer.signal(call.signal);
-
     connectionRef.current = peer;
   };
 
@@ -70,7 +67,6 @@ const ContextProvider = ({ children }) => {
 
     socket.on("callAccepted", (signal) => {
       setCallAccepted(true);
-
       peer.signal(signal);
     });
 
@@ -79,9 +75,7 @@ const ContextProvider = ({ children }) => {
 
   const leaveCall = () => {
     setCallEnded(true);
-
     connectionRef.current.destroy();
-
     window.location.reload();
   };
 
